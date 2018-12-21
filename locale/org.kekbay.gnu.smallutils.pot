@@ -1,0 +1,131 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: testing create pot\n"
+"POT-Creation-Date: 2018-12-21 21:54+0200\n"
+"PO-Revision-Date: 2018-03-30 13:59+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ui/startwindow.glade:32
+msgid "Recursively remove .DS_Store"
+msgstr ""
+
+#: ui/startwindow.glade:49 ui/startwindow.glade:108
+msgid "Click to select directory"
+msgstr ""
+
+#: ui/startwindow.glade:91
+msgid "Recursively remove executable"
+msgstr ""
+
+#: ui/startwindow.glade:155
+msgid "This is a translatable label."
+msgstr ""
+
+#: ui/startwindow.glade:175
+msgid "dummylabel"
+msgstr ""
+
+#: ui/startwindow.glade:198
+msgid "About"
+msgstr ""
+
+#: ui/startwindow.glade:216
+msgid "label"
+msgstr ""
+
+#: ui/startwindow.glade:231
+msgid "Exit"
+msgstr ""
+
+#: auxiliary.py:91
+msgid "_Yes"
+msgstr ""
+
+#: auxiliary.py:93
+msgid "_OK"
+msgstr ""
+
+#: auxiliary.py:95
+msgid "_No"
+msgstr ""
+
+#: auxiliary.py:97
+msgid "_Cancel"
+msgstr ""
+
+#: auxiliary.py:99
+msgid "OK"
+msgstr ""
+
+#: auxiliary.py:102
+msgid "ERROR"
+msgstr ""
+
+#: auxiliary.py:105
+msgid "WARNING"
+msgstr ""
+
+#: auxiliary.py:108
+msgid "QUESTION"
+msgstr ""
+
+#: auxiliary.py:111
+msgid "INFO"
+msgstr ""
+
+#: auxiliary.py:128
+msgid "You are about to:\n"
+msgstr ""
+
+#: auxiliary.py:129 startwindow.py:236
+msgid "Are you sure?"
+msgstr ""
+
+#: auxiliary2.py:76
+msgid "Please choose a directory"
+msgstr ""
+
+#: main.py:74
+msgid "Small Utils"
+msgstr ""
+
+#: startwindow.py:115
+msgid "Error loading from Glade file"
+msgstr ""
+
+#: startwindow.py:166
+msgid ""
+"This is the version of this window.\n"
+"Not the version of the application."
+msgstr ""
+
+#: startwindow.py:217
+msgid ""
+"This will remove .DS_Store files, recursively, inside the directory:\n"
+"{}\n"
+msgstr ""
+
+#: startwindow.py:218 startwindow.py:232
+msgid "Proceed?"
+msgstr ""
+
+#: startwindow.py:231
+msgid ""
+"This will remove executable from files, recursively, inside the directory:\n"
+"{}\n"
+msgstr ""
+
+#: startwindow.py:235
+msgid "This may make programs to stop responding!\n"
+msgstr ""

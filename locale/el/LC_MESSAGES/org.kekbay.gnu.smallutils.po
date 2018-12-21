@@ -1,0 +1,137 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: testing create pot\n"
+"POT-Creation-Date: 2018-12-21 21:54+0200\n"
+"PO-Revision-Date: 2018-12-21 22:04+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Last-Translator: Ηλιάδης Ηλίας <iliadis@kekbay.gr>\n"
+"Language: el\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: ui/startwindow.glade:32
+msgid "Recursively remove .DS_Store"
+msgstr ""
+
+#: ui/startwindow.glade:49 ui/startwindow.glade:108
+msgid "Click to select directory"
+msgstr "Πατήστε για να επιλέξετε διαδρομή"
+
+#: ui/startwindow.glade:91
+msgid "Recursively remove executable"
+msgstr ""
+
+#: ui/startwindow.glade:155
+msgid "This is a translatable label."
+msgstr ""
+
+#: ui/startwindow.glade:175
+msgid "dummylabel"
+msgstr ""
+
+#: ui/startwindow.glade:198
+msgid "About"
+msgstr "Περί..."
+
+#: ui/startwindow.glade:216
+msgid "label"
+msgstr ""
+
+#: ui/startwindow.glade:231
+msgid "Exit"
+msgstr "Έξοδος"
+
+#: auxiliary.py:91
+msgid "_Yes"
+msgstr "_Ναι"
+
+#: auxiliary.py:93
+msgid "_OK"
+msgstr "_Εντάξει"
+
+#: auxiliary.py:95
+msgid "_No"
+msgstr "Ό_χι"
+
+#: auxiliary.py:97
+msgid "_Cancel"
+msgstr "Ά_κυρο"
+
+#: auxiliary.py:99
+msgid "OK"
+msgstr "Εντάξει"
+
+#: auxiliary.py:102
+msgid "ERROR"
+msgstr "ΣΦΑΛΜΑ"
+
+#: auxiliary.py:105
+msgid "WARNING"
+msgstr "ΠΡΟΕΙΔΟΠΟΙΗΣΗ"
+
+#: auxiliary.py:108
+msgid "QUESTION"
+msgstr "ΕΡΩΤΗΣΗ"
+
+#: auxiliary.py:111
+msgid "INFO"
+msgstr "ΠΛΗΡΟΦΟΡΙΑ"
+
+#: auxiliary.py:128
+msgid "You are about to:\n"
+msgstr "Πρόκειται να:\n"
+
+#: auxiliary.py:129 startwindow.py:236
+msgid "Are you sure?"
+msgstr "Είστε σίγουρος/η;"
+
+#: auxiliary2.py:76
+msgid "Please choose a directory"
+msgstr "Παρακαλώ επιλέξτε έναν φάκελο"
+
+#: main.py:74
+msgid "Small Utils"
+msgstr "Εργαλειάκια"
+
+#: startwindow.py:115
+msgid "Error loading from Glade file"
+msgstr "Σφάλμα φόρτωσης του αρχείου Glade"
+
+#: startwindow.py:166
+msgid ""
+"This is the version of this window.\n"
+"Not the version of the application."
+msgstr ""
+"Αυτή είναι η έκδοση για το συγκεκριμένο παράθυρο.\n"
+"Δεν είναι ο αριθμός έκδοσης για την εφαρμογή."
+
+#: startwindow.py:217
+msgid ""
+"This will remove .DS_Store files, recursively, inside the directory:\n"
+"{}\n"
+msgstr ""
+"Αυτή η ενέργεια θα αφαιρέσει τα αρχεία .DS_Store \n"
+"από όλα τα αρχεία στο φάκελο και στους υποφακέλους του:{}\n"
+
+#: startwindow.py:218 startwindow.py:232
+msgid "Proceed?"
+msgstr "Να συνεχίσω;"
+
+#: startwindow.py:231
+msgid ""
+"This will remove executable from files, recursively, inside the directory:\n"
+"{}\n"
+msgstr ""
+"Αυτή η ενέργεια θα αφαιρέσει τη δυνατότητα εκτέλεσης ως πρόγραμμα,\n"
+"από όλα τα αρχεία στο φάκελο και στους υποφακέλους του:\n"
+"{}\n"
+
+#: startwindow.py:235
+msgid "This may make programs to stop responding!\n"
+msgstr "Αυτή ή ενέργεια μπορεί να κάνει τα προγράμματα να σταματήσουν να αποκρίνονται!\n"
