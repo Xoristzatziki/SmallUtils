@@ -31,6 +31,16 @@ ERROR_IMPORT_LIBRARIES_FAIL = -1
 ERROR_INVALID_GLADE_FILE = -2
 ERROR_GLADE_FILE_READ = -3
 
+WARNING_SYNAPTICS = """WARNING!!!!!
+
+The program does not check if the keyboard shortcut binding exists.
+If the shortcut:
+{}
+is binded to another command you may encounter problems.
+
+You have been warned.
+
+"""
 try:
     import os
     import sys
@@ -50,6 +60,10 @@ try:
     from auxiliary2 import ChooserDialog
     from auxiliary2 import RemoveDS_Storefiles
     from auxiliary2 import RemoveExecutableFromFiles
+    import auxiliary2 as other_functions
+    #from auxiliary2 import SetSynapticsShortCut
+    from selectsynaptics import SelectSynaptics
+
 except ImportError as eximp:
     print(eximp)
     sys.exit(ERROR_IMPORT_LIBRARIES_FAIL)
@@ -66,6 +80,7 @@ class StartWindow(Gtk.ApplicationWindow):
         self.myparent = None
         if 'parent' in kwargs:#use the same application
             self.myparent = kwargs['parent']
+        if 'app' in kwargs:#use the application
             self.app = kwargs['parent'].app
         elif 'application' in kwargs:
             self.app = kwargs['application']
@@ -120,7 +135,8 @@ class StartWindow(Gtk.ApplicationWindow):
             sys.exit(ERROR_INVALID_GLADE_FILE)
 
         # Get gui objects.
-        self.box1 = self.builder.get_object('box1')
+        self.boxCommands = self.builder.get_object('boxCommands')
+        self.boxCreateSynapticsShortcut = self.builder.get_object('boxCreateSynapticsShortcut')
         self.boxForFooter = self.builder.get_object('boxForFooter')
         self.boxMain = self.builder.get_object('boxMain')
         self.boxRemoveDS_Store = self.builder.get_object('boxRemoveDS_Store')
@@ -129,13 +145,17 @@ class StartWindow(Gtk.ApplicationWindow):
         self.buttonExit = self.builder.get_object('buttonExit')
         self.buttonRemoveDS_Store = self.builder.get_object('buttonRemoveDS_Store')
         self.buttonRemoveExecutable = self.builder.get_object('buttonRemoveExecutable')
+        self.buttonSynaptics = self.builder.get_object('buttonSynaptics')
         self.dummylabel = self.builder.get_object('dummylabel')
         self.eventboxPathRemoveDS_Store = self.builder.get_object('eventboxPathRemoveDS_Store')
         self.eventboxPathRemoveExecutable = self.builder.get_object('eventboxPathRemoveExecutable')
+        self.eventboxSynaptics = self.builder.get_object('eventboxSynaptics')
         self.label1 = self.builder.get_object('label1')
+        self.label2 = self.builder.get_object('label2')
         self.label3 = self.builder.get_object('label3')
         self.labelPathRemoveDS_Store = self.builder.get_object('labelPathRemoveDS_Store')
         self.labelPathRemoveExecutable = self.builder.get_object('labelPathRemoveExecutable')
+        self.labelSynaptics = self.builder.get_object('labelSynaptics')
         self.labelVersion = self.builder.get_object('labelVersion')
         self.labeltest = self.builder.get_object('labeltest')
 
@@ -154,6 +174,7 @@ class StartWindow(Gtk.ApplicationWindow):
         # to builder's main window
         self.buttonRemoveDS_Store.connect('clicked', self.on_buttonRemoveDS_Store_clicked)
         self.buttonRemoveExecutable.connect('clicked', self.on_buttonRemoveExecutable_clicked)
+        self.buttonSynaptics.connect('clicked', self.on_buttonSynaptics_clicked)
         self.connect('delete-event', self.on_windowMain_delete_event)
         self.connect('destroy', self.on_windowMain_destroy)
         self.connect('size-allocate', self.on_windowMain_size_allocate)
@@ -201,6 +222,9 @@ Not the version of the application."""))
             self.maximize()
         # Load any other settings here.
 
+        self.synaptics_device = None
+
+
 #********* Auto created handlers START *********************************
     def on_buttonAbout_clicked(self, widget, *args):
         """ Handler for buttonAbout.clicked. """
@@ -242,6 +266,40 @@ Not the version of the application."""))
         else:
             self.msg('No valid path!' + '\n' + str(fullpath))
 
+    def on_buttonSynaptics_clicked(self, widget, *args):
+        """ Handler for buttonSynaptics.clicked. """
+
+        if self.synaptics_device == None:
+            self.msg(_("No device selected!"))
+            return
+
+        OR_WAIT = _("You must manually alter it \nor wait for the version that will do this automatically.")
+        key_combinations_bundled, custom_bindings_names, combination_exists = other_functions.get_shorcut_combinations()
+        if combination_exists:
+            self.msg(_('The default combination already exists.\n') + OR_WAIT)
+            return
+
+        my_bin_path = os.path.expanduser("~/bin")
+        disable_synaptics_path = os.path.join(my_bin_path,"my_disable_synaptics")
+        if os.path.exists(disable_synaptics_path):
+            self.msg(_('The default bash script already exists.\n') + OR_WAIT)
+            return
+        thescripttext  = other_functions.create_synaptics_bash_file(self.synaptics_device)
+        try:
+            with open(disable_synaptics_path, 'x', encoding='utf-8') as f:
+                f.write(thescripttext)
+        except Exception as e:
+            print("An exception occured.", e)
+        make_executable(disable_synaptics_path)
+        #other_functions.bind_shortcut_to_command(disable_synaptics_path, custom_bindings_names)
+        other_functions.cinnamon_add_custom_setting(disable_synaptics_path)
+
+        self.buttonSynaptics.set_sensitive(False)
+        self.eventboxSynaptics.set_sensitive(False)
+        msg = _("""A key binding to a newly created script has been created.""")
+
+        self.msg(msg)
+
     def on_eventboxPathRemoveDS_Store_button_release_event(self, widget, event, *args):
         """ Handler for eventboxPathRemoveDS_Store.button-release-event. """
         dlg = ChooserDialog()
@@ -259,6 +317,21 @@ Not the version of the application."""))
             head, tail = os.path.split(thepath)
             self.labelPathRemoveExecutable.set_label(tail + '\n' + head)
             self.labelPathRemoveExecutable.set_tooltip_text(thepath)
+
+    def on_eventboxSynaptics_button_press_event(self, widget, event, *args):
+        """ Handler for eventboxSynaptics.button-press-event. """
+        some_custom_args = {}
+        some_custom_args['modal'] = True
+        #event to trigger on return
+        some_custom_args['trigger_before_exit'] = self.synaptice_device_selected
+        #print(type(self.eventboxSynaptics.get_toplevel().super()))
+        self.synaptics_select = SelectSynaptics(application=self.app,
+                #parent = self.eventboxSynaptics.get_toplevel(),
+                custom_args = some_custom_args,
+                modal = True)
+        self.hide()
+        self.synaptics_select.present()
+
 
     def on_windowMain_delete_event(self, widget, event, *args):
         """ Handler for windowMain.delete-event. """
@@ -323,5 +396,23 @@ Not the version of the application."""))
         settings.save()
 
 #********* Auto created "class defs" END **************************************************************
+    def synaptice_device_selected(self, *args, **kwargs):
+        #print(args)
+        #print(kwargs)
+        return_parameters = kwargs['return_parameters']
+        if return_parameters['has selection']:
+            self.labelSynaptics.set_markup(_("Selected device") + ":\n<b>" + return_parameters['selected'] + "</b>")
+            self.synaptics_device = return_parameters['selected']
+        else:
+            self.labelSynaptics.set_markup("<b>" + _("No device selected!!!") + "</b>")
+            self.synaptics_device = None
+        self.show()
+
 
 #********* Window class  END***************************************************************************
+def make_executable(filename):
+    """ Make a file executable, by setting mode 774. """
+    import stat
+    # chmod 774
+    mode774 = stat.S_IRWXU | stat.S_IRWXG | stat.S_IROTH
+    os.chmod(filename, mode774)

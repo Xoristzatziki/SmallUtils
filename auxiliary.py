@@ -54,6 +54,7 @@ class MessageBox():
         aboutdialog.set_version(self.app.name + ' v.' + self.app.version)
         AUTHORSFILE = os.path.join(self.INFO_DIR, 'AUTHORS')
         COPYRIGHTFILE = os.path.join(self.INFO_DIR, 'COPYRIGHT')
+        LICENSEFILE = os.path.join(self.INFO_DIR, 'LICENSE')
         COMMENTSFILE = os.path.join(self.INFO_DIR, 'COMMENTS')
         TRANSLATORSFILE = os.path.join(self.INFO_DIR, 'TRANSLATORS')
         ARTISTSFILE = os.path.join(self.INFO_DIR, 'ARTISTS')
@@ -63,6 +64,9 @@ class MessageBox():
         if os.path.exists(COPYRIGHTFILE):
             with open(COPYRIGHTFILE, mode='rt', encoding='utf-8') as f:
                 aboutdialog.set_copyright(f.read())
+        if os.path.exists(LICENSEFILE):
+            with open(LICENSEFILE, mode='rt', encoding='utf-8') as f:
+                aboutdialog.set_license(f.read())
         if os.path.exists(COMMENTSFILE):
             with open(COMMENTSFILE, mode='rt', encoding='utf-8') as f:
                 aboutdialog.set_comments(f.read())
