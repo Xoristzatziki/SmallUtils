@@ -141,22 +141,27 @@ class StartWindow(Gtk.ApplicationWindow):
         self.boxMain = self.builder.get_object('boxMain')
         self.boxRemoveDS_Store = self.builder.get_object('boxRemoveDS_Store')
         self.boxRemoveExecutable = self.builder.get_object('boxRemoveExecutable')
+        self.boxpkill = self.builder.get_object('boxpkill')
         self.buttonAbout = self.builder.get_object('buttonAbout')
         self.buttonExit = self.builder.get_object('buttonExit')
         self.buttonRemoveDS_Store = self.builder.get_object('buttonRemoveDS_Store')
         self.buttonRemoveExecutable = self.builder.get_object('buttonRemoveExecutable')
         self.buttonSynaptics = self.builder.get_object('buttonSynaptics')
+        self.buttonpkill = self.builder.get_object('buttonpkill')
         self.dummylabel = self.builder.get_object('dummylabel')
         self.eventboxPathRemoveDS_Store = self.builder.get_object('eventboxPathRemoveDS_Store')
         self.eventboxPathRemoveExecutable = self.builder.get_object('eventboxPathRemoveExecutable')
         self.eventboxSynaptics = self.builder.get_object('eventboxSynaptics')
+        self.eventboxpkill = self.builder.get_object('eventboxpkill')
         self.label1 = self.builder.get_object('label1')
         self.label2 = self.builder.get_object('label2')
         self.label3 = self.builder.get_object('label3')
+        self.label4 = self.builder.get_object('label4')
         self.labelPathRemoveDS_Store = self.builder.get_object('labelPathRemoveDS_Store')
         self.labelPathRemoveExecutable = self.builder.get_object('labelPathRemoveExecutable')
         self.labelSynaptics = self.builder.get_object('labelSynaptics')
         self.labelVersion = self.builder.get_object('labelVersion')
+        self.labelpkill = self.builder.get_object('labelpkill')
         self.labeltest = self.builder.get_object('labeltest')
 
         # Connect signals existing in the Glade file.
@@ -175,6 +180,7 @@ class StartWindow(Gtk.ApplicationWindow):
         self.buttonRemoveDS_Store.connect('clicked', self.on_buttonRemoveDS_Store_clicked)
         self.buttonRemoveExecutable.connect('clicked', self.on_buttonRemoveExecutable_clicked)
         self.buttonSynaptics.connect('clicked', self.on_buttonSynaptics_clicked)
+        self.buttonpkill.connect('clicked', self.on_buttonpkill_clicked)
         self.connect('delete-event', self.on_windowMain_delete_event)
         self.connect('destroy', self.on_windowMain_destroy)
         self.connect('size-allocate', self.on_windowMain_size_allocate)
@@ -268,10 +274,10 @@ Not the version of the application."""))
 
     def on_buttonSynaptics_clicked(self, widget, *args):
         """ Handler for buttonSynaptics.clicked. """
-
         if self.synaptics_device == None:
             self.msg(_("No device selected!"))
             return
+
 
         OR_WAIT = _("You must manually alter it \nor wait for the version that will do this automatically.")
         key_combinations_bundled, custom_bindings_names, combination_exists = other_functions.get_shorcut_combinations()
@@ -299,6 +305,12 @@ Not the version of the application."""))
         msg = _("""A key binding to a newly created script has been created.""")
 
         self.msg(msg)
+
+    def on_buttonpkill_clicked(self, widget, *args):
+        """ Handler for buttonpkill.clicked. """
+        process_name = self.labelpkill.get_label()
+        output = other_functions.pkill_a_process(process_name)
+        self.msg(output)
 
     def on_eventboxPathRemoveDS_Store_button_release_event(self, widget, event, *args):
         """ Handler for eventboxPathRemoveDS_Store.button-release-event. """
@@ -332,6 +344,9 @@ Not the version of the application."""))
         self.hide()
         self.synaptics_select.present()
 
+    def on_eventboxpkill_button_press_event(self, widget, event, *args):
+        """ Handler for eventboxpkill.button-press-event. """
+        pass
 
     def on_windowMain_delete_event(self, widget, event, *args):
         """ Handler for windowMain.delete-event. """

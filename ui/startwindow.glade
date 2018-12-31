@@ -201,6 +201,69 @@
               </packing>
             </child>
             <child>
+              <object class="GtkBox" id="boxpkill">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="spacing">3</property>
+                <child>
+                  <object class="GtkLabel" id="label4">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="label" translatable="yes">pkill</property>
+                    <property name="wrap">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkEventBox" id="eventboxpkill">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <signal name="button-press-event" handler="on_eventboxpkill_button_press_event" swapped="no"/>
+                    <child>
+                      <object class="GtkLabel" id="labelpkill">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">currently only mono-sgen</property>
+                        <property name="label" translatable="yes">mono-sgen</property>
+                        <property name="wrap">True</property>
+                        <property name="selectable">True</property>
+                        <property name="ellipsize">middle</property>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="buttonpkill">
+                    <property name="label">gtk-execute</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="use_stock">True</property>
+                    <property name="always_show_image">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">3</property>
+              </packing>
+            </child>
+            <child>
               <placeholder/>
             </child>
           </object>

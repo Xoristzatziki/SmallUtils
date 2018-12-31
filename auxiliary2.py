@@ -226,6 +226,15 @@ def cinnamon_add_custom_setting(thecommand, my_combination=DEFAULT_KEY_COMBINATI
     new_schema.apply()
     Gio.Settings.sync()
 
+def pkill_a_process(process_name):
+
+    try:
+        output = subprocess.getoutput("pkill " + process_name)
+        return str(output)
+    except Exception as e:
+        return str(e)
+
+
 class GetSynapticsShortCut:
     def __init__(self):
         #self.test = 0
