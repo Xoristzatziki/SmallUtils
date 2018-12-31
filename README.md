@@ -1,5 +1,5 @@
 # SmallUtils
-Gui for some utils.
+Gui for some utils using GTK3. Created on UBUNTU 16.04, cinnamon 3.6.7
 
 # Remove .DS_Store file in given directory and in all its subdirectories.
 Every time I extract a zip created in MAC my disk is "polluted" with .DS_Store files. This is an easy way to remove them instead of trying to remember the exact bash commands.
